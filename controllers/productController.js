@@ -176,7 +176,7 @@ const productController = {
   },
 
   // Get all chemical products
-  /*getProducts: async (req, res) => {
+  getProducts: async (req, res) => {
     try {
       const products = await Product.find().sort({ createdAt: -1 });
       
@@ -192,9 +192,9 @@ const productController = {
         error: error.message
       });
     }
-  },*/
+  },
   // GET /api/products?page=1&limit=10
-getProducts: async (req, res) => {
+getProductss: async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
