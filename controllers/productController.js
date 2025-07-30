@@ -176,7 +176,7 @@ const productController = {
   },
 
   // Get all chemical products
-  getProducts: async (req, res) => {
+  /*getProducts: async (req, res) => {
     try {
       const products = await Product.find().sort({ createdAt: -1 });
       
@@ -192,7 +192,38 @@ const productController = {
         error: error.message
       });
     }
-  },
+  },*/
+  // GET /api/products?page=1&limit=10
+getProducts: async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const products = await Product.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Product.countDocuments();
+
+    res.status(200).json({
+      success: true,
+      count: products.length,
+      total,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      products
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: error.message
+    });
+  }
+}
+
 
   // Get products by main category
   getProductsByMainCategory: async (req, res) => {
