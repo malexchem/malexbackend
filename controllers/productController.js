@@ -222,7 +222,7 @@ getProducts: async (req, res) => {
       error: error.message
     });
   }
-}
+},
 
 
   // Get products by main category
