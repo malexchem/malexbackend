@@ -10,7 +10,7 @@ const { authorize } = require('../middleware/auth');
 // Create a new product
 router.post('/', upload.array('images', 5), productController.createProduct);
 // Simple GET endpoint for all products
-router.get('//', productController.getProducts);
+router.get('/s', productController.getProducts);
 router.get('/paginated', productController.getProductss);
 
 module.exports = router;
